@@ -1,0 +1,4 @@
+flask
+pycrypto
+cryptography
+gunicorn

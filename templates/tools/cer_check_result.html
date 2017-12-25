@@ -1,0 +1,247 @@
+<div class="loading_flag" style="display:none;">{{ cer_content['error'] }}</div>
+{% if cer_content['error'] %}
+<style type="text/css">
+    .icon-hidden{
+        display: none;
+    }
+    #more_show{
+        display: none;
+    }
+    .left-echo{
+        text-align: right;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        border-right:1px solid #e6e6e6;
+      } 
+    .right-echo{
+        padding-left: 10px;
+        padding-bottom: 10px;
+      }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:20px;">
+      <div class="layui-col-md1">&nbsp;</div>
+      <div class="layui-col-md10">
+          <div style="color:#009688;">主题信息<hr></div>
+          <div class=""layui-row"">
+            <div class="layui-col-md2 left-echo">通用名称(CN)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['commonName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">国家(C)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['countryName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">省份(ST)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['stateOrProvinceName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">城市(L)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['localityName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">组织(O)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['organizationName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">部门(OU)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['organizationalUnitName'] }}</div>
+          </div>
+          <div style="color:#009688;margin-top:20px;">签发者信息<hr></div>
+          {% if cer_content['msg']['i_commonName'] %}
+          <div class=""layui-row"">
+            <div class="layui-col-md2 left-echo">通用名称(CN)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_commonName'] }}</div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['i_commonName'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">国家(C)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_countryName'] }}</div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['i_stateOrProvinceName'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">省份(ST)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_stateOrProvinceName'] }}</div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['i_localityName'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">城市(L)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_localityName'] }}</div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['i_organizationName'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">组织(O)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_organizationName'] }}</div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['i_organizationalUnitName'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">部门(OU)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['i_organizationalUnitName'] }}</div>
+          </div>
+          {% endif %}
+          <div style="color:#009688;margin-top:20px;">证书信息<hr></div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">序列号</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_serial_number'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">根证书</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_ca_not'] }}</div>
+          </div>
+          {% if cer_content['msg']['cert_for_who'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">用途</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_for_who'] }}</div>
+          </div>
+          {% endif %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">密钥强度</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['public_key_size'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">密钥类型</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['public_key'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">签名算法</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['sign_with'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">颁发时间</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_not_valid_before'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">过期时间</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_not_valid_after'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">有效日期</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_valid_days'] }}天</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">SHA1指纹</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_hash_sha1'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">SHA256指纹</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['cert_hash_sha256'] }}</div>
+          </div>
+          {% if cer_content['msg']['cert_ca_url'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">ca_url</div>
+            <div class="layui-col-md10 right-echo"><a href="{{ cer_content['msg']['cert_ca_url'] }}">{{ cer_content['msg']['cert_ca_url'] }}</a></div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['cert_ca_ocsp'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">ocsp_url</div>
+            <div class="layui-col-md10 right-echo"><a href="{{ cer_content['msg']['cert_ca_ocsp'] }}">{{ cer_content['msg']['cert_ca_ocsp'] }}</a></div>
+          </div>
+          {% endif %}
+          {% if cer_content['msg']['cert_crl_url'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">crl_url</div>
+            <div class="layui-col-md10 right-echo"><a href="{{ cer_content['msg']['cert_crl_url'] }}">{{ cer_content['msg']['cert_crl_url'] }}</a></div>
+          </div>
+          {% endif %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">签名信息</div>
+            <div class="layui-col-md10 right-echo">
+                <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;">
+                    <pre>{{ cer_content['msg']['cer_signture'] }}</pre>
+                </div>
+            </div>
+          </div>
+          {% if cer_content['msg']['cert_extent_info'] %}
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">备用</div>
+            <div class="layui-col-md10 right-echo">
+                <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;">
+                    <pre>{{ cer_content['msg']['cert_extent_info'] }}</pre>
+                </div>
+            </div>
+          </div>
+          {% endif %}
+          <div class="layui-row" style="text-align:center;">
+            <a href="javascript:;" id="more">公钥
+                <i class="layui-icon up icon-hidden">&#xe619;</i>
+                <i class="layui-icon down">&#xe61a;</i>
+            </a>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">公钥</div>
+            <div class="layui-col-md10 right-echo">
+                <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ cer_content['msg']['public_key_string'] }}</pre></div>
+            </div>
+          </div>
+          {% if cer_content['msg']['public_key']=='RSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(e)</div>
+            <div class="layui-col-md10 right-echo">{{ cer_content['msg']['public_key_e'] }}</div>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(n)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ cer_content['msg']['public_key_n'] }}</pre></div>
+            </div>
+          </div>
+          {% elif cer_content['msg']['public_key']=='DSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(y)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ cer_content['msg']['public_key_y'] }}</pre></div>
+            </div>
+          </div>
+          {% elif cer_content['msg']['public_key']=='ECDSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(x)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ cer_content['msg']['public_key_x'] }}</pre></div>
+            </div>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(y)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ cer_content['msg']['public_key_y'] }}</pre></div>
+            </div>
+          </div>
+          {% endif %}        
+        </div>
+        <div class="layui-col-md1">&nbsp;</div>
+    </div>
+</div>
+{% else %}
+<style type="text/css">
+    .error-show{
+        text-align: center;
+    }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:28%;">
+        <div class="error-show"><i class="layui-icon" style="font-size: 30px; color: #FF5722">&#xe69c;</i>&nbsp;&nbsp;{{ cer_content['msg'] }}</div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer,
+        $=layui.jquery;
+        //time设置为0永远不自动关闭，shade为0表示去遮罩。
+        var loading_index = layer.msg('加载中...', {icon: 16,time:0,shade:0});
+        if ($('div .loading_flag').val != null || $('div .loading_flag').val !="" || $('div .loading_flag').val !=undefined){
+            layer.close(loading_index);
+        }
+        // 更多显示隐藏切换
+        $("a#more").on('click',function(){
+            $(this).children('.up').toggleClass('icon-hidden');
+            $(this).children('.down').toggleClass('icon-hidden');
+            $("div#more_show").toggle();
+        });
+    });
+</script>

@@ -1,0 +1,29 @@
+<div class="loading_flag" style="display:none;">{{ rsa_check_r['error'] }}</div>
+<style type="text/css">
+    .error-show{
+        text-align: center;
+    }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:28%;">
+        {% if rsa_check_r['error'] %}
+        <div class="error-show"><i class="layui-icon" style="font-size: 30px; color: #009688">&#xe6af;</i>&nbsp;&nbsp;{{ rsa_check_r['msg'] }}</div>
+        {% else %}
+        <div class="error-show"><i class="layui-icon" style="font-size: 30px; color: #FF5722">&#xe69c;</i>&nbsp;&nbsp;{{ rsa_check_r['msg'] }}</div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer,
+        $=layui.jquery;
+        //time设置为0永远不自动关闭，shade为0表示去遮罩。
+        var loading_index = layer.msg('加载中...', {icon: 16,time:0,shade:0});
+        if ($('div .loading_flag').val != null || $('div .loading_flag').val !="" || $('div .loading_flag').val !=undefined){
+            layer.close(loading_index);
+            console.log(loading_index.offset);
+        }
+        //
+    });
+</script>

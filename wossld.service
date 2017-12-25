@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn Demo
+After=network.target
+
+[Service]
+User=root
+Group=root
+PIDFile=/tmp/gunicorn.pid
+WorkingDirectory=/root/wossl
+ExecStart=/usr/bin/gunicorn -c wsgi_config.py wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target 

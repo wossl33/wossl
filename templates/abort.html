@@ -1,0 +1,164 @@
+<style type="text/css">
+    ul.jianjie li{
+        list-style-type:disc;
+        padding-top:10px;
+    }
+    a.tuoguan{
+        width:200px;
+        height:80px;
+        line-height:80px;
+        font-size:20px;
+    }
+</style>
+<div class="layui-container">
+        <div class="layui-row layui-col-space10" >
+            <div class="layui-col-md1"></div>
+            <div class="layui-col-md10">
+                <div class="layui-row" style="margin-top:20px;">
+                    <h2 style="text-align:center;color:#666;">OpenSSL管理平台</h2>
+                </div>
+                <div class="layui-row" style="margin-top:20px;">
+                    <div class="layui-col-md4">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend style="color:#009968;">简介</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-col-md8"></div>
+                </div>
+                <div class="layui-row">
+                    <div style="padding-left:20px;color:#666">
+                        OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完成对称算法、哈希校验、非对称算法、证书管理、SSL安全等操作。
+                    </div>
+                    <div style="padding-left:20px;color:#666;padding-top:5px;"><b>功能模块：</b></div>
+                    <div style="padding-left:60px;color:#666">
+                        <ul class="jianjie">
+                            <li>
+                                对称算法：AES、DES、Triple DES。
+                            </li>
+                            <li>
+                                哈希校验：MD2、MD4、MD5、SHA1、SHA224、SHA256、SHA384、SHA512、RIPEMD、RIPEMD160、HMAC。
+                            </li>
+                            <li>
+                                非对称算法：公私钥的加解密、公钥的解析提取、公私钥对的生成以及加密私钥的密码修改等。
+                            </li>
+                            <li>
+                                证书工具：证书查看、CSR查看、CSR生成、私钥校验、证书格式转换、自签名证书生成。
+                            </li>
+                            <li>
+                                SSL检测：握手过程探测、协议/加密套件、SSL常见漏洞扫描、SSL健康检查等。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-row" style="margin-top:20px;">
+                    <div class="layui-col-md4">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend style="color:#009968;">托管</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-col-md8"></div>
+                </div>
+                <div class="layui-row">
+                    <div style="padding-left:20px;color:#666;text-align:center;">
+                        <a class="layui-btn layui-btn-primary tuoguan" href="http://www.wossl.org" target="_blank" style="color:#01AAED;"><i class="layui-icon" style="font-size:50px;">&#xe68e;</i>官网</a>
+                        <a class="layui-btn layui-btn-primary tuoguan" href="https://gitee.com/wossl33/wossl" target="_blank" style="color:#FF5722;"><i class="layui-icon" style="font-size:50px;">&#xe681;</i>码云</a>
+                        <a class="layui-btn layui-btn-primary tuoguan" href="https://github.com/wossl33/wossl" target='_blank' style="color:#393D49;"><i class="layui-icon" style="font-size:50px;">&#xe67c;</i><i>Github</i></a>
+                    </div>
+                </div>
+                <div class="layui-row" style="margin-top:20px;">
+                    <div class="layui-col-md4">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend style="color:#009968;">赞助</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-col-md8"></div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md6" style="text-align:center;">
+                        <div style="text-align:center;color:#666">支付宝</div>
+                        <img src="../static/images/pay/alibaba.png" />
+                    </div>
+                    <div class="layui-col-md6" style="text-align:center;">
+                        <div style="text-align:center;color:#666">微信</div>
+                        <img src="../static/images/pay/weixin.png" /> 
+                    </div>
+                </div>
+                <div class="layui-row" style="margin-top:20px;">
+                    <div class="layui-col-md4">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend style="color:#009968;">更新日志</legend>
+                        </fieldset>
+                    </div>
+                    <div class="layui-col-md8"></div>
+                </div>
+                <div class="layui-row">
+                <ul class="layui-timeline" style="padding-left:20px;">
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">
+                                1.1.2
+                                <span class="layui-badge-rim">2018-02-02</span>
+                                <span class="layui-badge-rim">未上线</span>
+                              </h3>
+                                <ul>
+                                  <li>
+                                    实现登录日志功能，记录登录IP和登录时间；用户可点击右上角图标<i class="layui-icon" style="font-size: 14px;color:#FFB800;">&#xe715;</i>查看。
+                                  </li>
+                                  <li>
+                                    实现证书格式转换功能，转换方式包括PEM转JKS、PEM转PCKS12，及反向格式转换等。
+                                  </li>
+                                </ul>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">
+                              1.1.1
+                              <span class="layui-badge-rim">2017-12-22</span>
+                              <span class="layui-badge layui-bg-green">已上线</span>
+                            </h3>
+                              <ul>
+                                <li>
+                                  实现AES、DES、Triple DES加解密。
+                                </li>
+                                <li>
+                                  实现MD5、SHA1、SHA256、SHA512等Hash计算。
+                                </li>
+                              </ul>
+                        </div>
+                      </li>
+                        <li class="layui-timeline-item">
+                          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                          <div class="layui-timeline-content layui-text">
+                              <h3 class="layui-timeline-title">
+                                1.1.0
+                                <span class="layui-badge-rim">2017-12-15</span>
+                                <span class="layui-badge layui-bg-green">已上线</span>
+                              </h3>
+                                <ul>
+                                  <li>
+                                    实现pem格式CSR的结构查看功能，可导出public_key明文。
+                                  </li>
+                                  <li>
+                                    实现pem格式CSR生成功能，可根据RSA、DSA、ECDSA等不同的加密算法，以及加密强度和签名算法，生成CSR和私钥对。
+                                  </li>
+                                  <li>
+                                    实现pem格式证书的结构查看功能，可导出public_key明文。
+                                  </li>
+                                  <li>
+                                    实现公私钥校验功能，可校验证书与私钥、证书与CSR以及CSR与私钥之间的匹配关系。
+                                  </li>
+                                  <li>
+                                    实现私钥的加解密功能，对私钥进行加密，对加密后私钥进行解密。
+                                  </li>
+                                </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+            </div>
+            <div class="layui-col-md1"></div>
+        </div> 
+</div>

@@ -1,0 +1,157 @@
+<div class="loading_flag" style="display:none;">{{ csr_content['error'] }}</div>
+{% if csr_content['error'] %}
+<style type="text/css">
+    .icon-hidden{
+        display: none;
+    }
+    #more_show{
+        display: none;
+    }
+    .left-echo{
+      text-align: right;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      border-right:1px solid #e6e6e6;
+    } 
+  .right-echo{
+      padding-left: 10px;
+      padding-bottom: 10px;
+    }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:20px;">
+      <div class="layui-col-md1">&nbsp;</div>
+      <div class="layui-col-md10">
+        <div class='sec-title'>
+          <div style="color:#009688;">CSR详情<hr></div>
+          <div class=""layui-row"">
+            <div class="layui-col-md2 left-echo">通用名称(CN)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['commonName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">备用名</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['extension'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">国家(C)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['countryName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">省份(ST)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['stateOrProvinceName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">城市(L)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['localityName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">组织(O)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['organizationName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">部门(OU)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['organizationalUnitName'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">密钥强度</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['public_key_size'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">密钥类型</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['public_key'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">签名算法</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['sign_with'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">签名是否有效</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['csr_sign_valid'] }}</div>
+          </div>
+          <div class="layui-row">
+            <div class="layui-col-md2 left-echo">签名信息</div>
+            <div class="layui-col-md10 right-echo">
+                <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;">
+                  <pre>{{ csr_content['msg']['csr_signture'] }}</pre>
+                </div>
+            </div>
+          </div>
+          <div class="layui-row" style="text-align:center;">
+            <a href="javascript:;" id="more">公钥
+              <i class="layui-icon up icon-hidden">&#xe619;</i>
+              <i class="layui-icon down">&#xe61a;</i>
+            </a>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">公钥</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ csr_content['msg']['public_key_string'] }}</pre></div>
+            </div>
+          </div>
+          {% if csr_content['msg']['public_key']=='RSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(e)</div>
+            <div class="layui-col-md10 right-echo">{{ csr_content['msg']['public_key_e'] }}</div>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(n)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ csr_content['msg']['public_key_n'] }}</pre></div>
+            </div>
+          </div>
+          {% elif csr_content['msg']['public_key']=='DSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(y)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ csr_content['msg']['public_key_y'] }}</pre></div>
+            </div>
+          </div>
+          {% elif csr_content['msg']['public_key']=='ECDSA' %}
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(x)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ csr_content['msg']['public_key_x'] }}</pre></div>
+            </div>
+          </div>
+          <div class="layui-row" id="more_show">
+            <div class="layui-col-md2 left-echo">PN(y)</div>
+            <div class="layui-col-md10 right-echo">
+              <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ csr_content['msg']['public_key_y'] }}</pre></div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+     </div>
+     <div class="layui-col-md1">&nbsp;</div>
+  </div>
+</div>
+{% else %}
+<style type="text/css">
+    .error-show{
+        text-align: center;
+    }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:28%;">
+        <div class="error-show"><i class="layui-icon" style="font-size: 30px; color: #FF5722">&#xe69c;</i>&nbsp;&nbsp;{{ csr_content['msg'] }}</div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer,
+        $=layui.jquery;
+        //time设置为0永远不自动关闭，shade为0表示去遮罩。
+        var loading_index = layer.msg('加载中...', {icon: 16,time:0,shade:0});
+        if ($('div .loading_flag').val != null || $('div .loading_flag').val !="" || $('div .loading_flag').val !=undefined){
+            layer.close(loading_index);
+        }
+        // 更多显示隐藏切换
+        $("a#more").on('click',function(){
+            $(this).children('.up').toggleClass('icon-hidden');
+            $(this).children('.down').toggleClass('icon-hidden');
+            $("div#more_show").toggle();
+        });
+    });
+</script>

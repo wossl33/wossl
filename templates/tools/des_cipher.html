@@ -1,0 +1,122 @@
+<div class="layui-container">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md1"></div>
+            <div class="layui-col-md10">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item layui-form-text">
+                        <pre>
+                        <textarea name="text" placeholder="输入待加解密文本内容" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:300px;"></textarea>
+                        </pre>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">模式</label>
+                            <div class="layui-input-inline">
+                            <select name="mode">
+                                <option value="CBC">CBC</option>
+                                <option value="ECB">ECB</option>
+                                <option value="CFB">CFB</option>
+                                <option value="OFB">OFB</option>
+                                <option value="CTR">CTR</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="key" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="key" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">偏移量</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="iv" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="iv，ECB和CTR无需填写！" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                                <label class="layui-form-label">编码</label>
+                                <div class="layui-input-inline">
+                                <select name="out_mode">
+                                    <option value="base64">Base64</option>
+                                    <option value="hex">Hex</option>
+                                </select>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align:center;">
+                            <div class="layui-inline">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit="" lay-filter="des_jiami">加&nbsp;&nbsp;密</button>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit="" lay-filter="des_jiemi">解&nbsp;&nbsp;密</button>
+                                    </div>
+                                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-md1"></div>
+        </div>
+    </div>
+            
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+            layui.use('form', function(){
+              var form = layui.form,
+              $=layui.jquery;
+            
+              //监听提交
+              form.on('submit(des_jiami)', function(data){
+                var form_value=data.field;
+                $.ajax({
+                    type:"POST",
+                    url:"/des/des_encrypt",
+                    data:data.field,
+                    dataType: "html",
+                    success: function(data){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            title:'结果',
+                            area: ['70%','80%'], //宽高
+                            content: data,
+                            cancel: function(index, layero){
+                                //关闭所有弹出层
+                                layer.closeAll();
+                                return false;
+                              }
+                        });
+                    }
+                });
+                return false;
+              });
+              //监听提交
+              form.on('submit(des_jiemi)', function(data){
+                var form_value=data.field;
+                $.ajax({
+                    type:"POST",
+                    url:"/des/des_decrypt",
+                    data:data.field,
+                    dataType: "html",
+                    success: function(data){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            title:'结果',
+                            area: ['70%','80%'], //宽高
+                            content: data,
+                            cancel: function(index, layero){
+                                //关闭所有弹出层
+                                layer.closeAll();
+                                return false;
+                              }
+                        });
+                    }
+                });
+                return false;
+              });
+              form.render();
+            });
+            </script>

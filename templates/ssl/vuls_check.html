@@ -1,0 +1,77 @@
+<style type="text/css">
+    .cve li a:hover{color: #009688;text-decoration:underline;}
+</style>
+<div class="layui-container">
+    <div class="layui-row" style="height:100px;"></div>
+    <form class="layui-form" action="">
+        <div class="layui-row layui-col-space8">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item layui-form-text">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="域名或IP地址" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md1">
+                    <div class="layui-form-item">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="端口" class="layui-input" style="width:56px;">
+                    </div>
+                </div>
+            <div class="layui-col-md1">
+                <div class="layui-form-item">
+                        <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon">&#xe615;</i>扫描</button>
+                </div>
+            </div>
+            <div class="layui-col-md2"></div>
+        </div>
+    </form>
+    <div class="layui-row layui-col-space8">
+        <div class="layui-col-md2"></div>
+        <div class="layui-col-md8">
+            <blockquote class="layui-elem-quote layui-quote-nm" style="color:#666;">
+                <ul class="cve">
+                    <li>
+                        <a href="">CVE-2016-0800</a>&nbsp;&nbsp;DROWN漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2016-2107</a>&nbsp;&nbsp;OpenSSL Padding Oracle 攻击
+                    </li>
+                    <li>
+                        <a href="">CVE-2015-0204</a>&nbsp;&nbsp;FREAK漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2015-4000</a>&nbsp;&nbsp;Logjam漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2014-0224</a>&nbsp;&nbsp;OpenSSL CCS注入漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2014-0160</a>&nbsp;&nbsp;HeartBleed漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2014-3566</a>&nbsp;&nbsp;POODLE漏洞
+                    </li>
+                    <li>
+                        <a href="">CVE-2012-4929</a>&nbsp;&nbsp;CRIME漏洞
+                    </li>
+                </ul>
+            </blockquote>
+        </div>
+        <div class="layui-col-md2"></div>
+    </div>
+</div>
+        
+        <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+        <script>
+        layui.use('form', function(){
+          var form = layui.form
+          
+          //监听提交
+          form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+              title: '暂无此功能！'
+            })
+            return false;
+          });
+          form.render();
+        });
+        </script>

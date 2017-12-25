@@ -1,0 +1,85 @@
+<div class="layui-container">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md8">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item layui-form-text">
+                        <pre>
+                        <textarea name="text" placeholder="输入待HASH文本" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:200px;"></textarea>
+                        </pre>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="MD2" title="MD2" checked="">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="MD4" title="MD4">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="MD5" title="MD5">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="SHA1" title="SHA1">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="SHA224" title="SHA224">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="SHA256" title="SHA256">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="SHA384" title="SHA384">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="SHA512" title="SHA512">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="RIPEMD" title="RIPEMD">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="RIPEMD160" title="RIPEMD160">
+                        <input type="radio" name="hash" lay-filter="hash_radio" value="HMAC" title="HMAC">
+                    </div>
+                    <div class="layui-form-item hidden_key" id="key">
+                        <input type="text" name="key" autocomplete="off" placeholder="key" class="layui-input">
+                    </div>
+                    <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="hash_com">计&nbsp;&nbsp;算</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-md2"></div>
+        </div>
+    </div>
+    <style type="text/css">
+        .hidden_key{
+            display: none;
+        }
+    </style>        
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+            layui.use('form', function(){
+              var form = layui.form,
+              $=layui.jquery;
+            
+              //监听radio选中事件
+              form.on('radio(hash_radio)', function(data){
+              //被点击的radio的value值
+              if (data.value == 'HMAC'){
+                  $('div#key').removeClass('hidden_key');
+              }
+              else if(!$('div#key').hasClass('hidden_key')){
+                  $('div#key').addClass('hidden_key');
+              }
+              });
+              //监听提交
+              form.on('submit(hash_com)', function(data){
+                var form_value=data.field;
+                $.ajax({
+                    type:"POST",
+                    url:"/hashs/sha_hash",
+                    data:data.field,
+                    dataType: "html",
+                    success: function(data){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            title:'结果',
+                            area: ['70%','80%'], //宽高
+                            content: data,
+                            cancel: function(index, layero){
+                                //关闭所有弹出层
+                                layer.closeAll();
+                                return false;
+                              }
+                        });
+                    }
+                });
+                return false;
+              });
+              form.render('radio');
+            });
+            </script>

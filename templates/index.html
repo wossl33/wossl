@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>OpenSSL管理平台</title>
+  <link rel="stylesheet" href="../static/layui-v2.2.45/layui/css/layui.css">
+  <style type="text/css">
+    /*禁止第一个tab出现删除按钮*/
+    .layui-tab ul.layui-tab-title li:nth-child(1) i.layui-tab-close {display: none;}
+    .footer p {color: #666;}
+    .footer p a{color: #666;}
+    .footer p a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+      <div class="layui-header">
+        <div class="layui-logo">OpenSSL管理平台</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+          <li class="layui-nav-item"><a href="" id="gmssl">GmSSL国密</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+          <li class="layui-nav-item"><a href="javascript:;" id="log"><i class="layui-icon" style="font-size: 14px;color:#FFB800;">&#xe715;</i>&nbsp;{{ client_ip }}</a></li>
+          <li class="layui-nav-item"><a href="javascript:;" id="gift"><i class="layui-icon" style="font-size: 14px;color:#FF5722;">&#xe65e;</i>&nbsp;赞助</a></li>
+          <li class="layui-nav-item"><a href="" id="abort"><i class="layui-icon" style="font-size: 14px;">&#xe60b;</i>&nbsp;关于</a></li>
+        </ul>
+      </div>
+      
+      <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+          <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+          <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+              <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;"><i class="layui-icon" style="font-size: 14px;">&#xe609;</i>&nbsp;&nbsp;对称算法</a>
+                <dl class="layui-nav-child">
+                  <dd><a href="javascript:;" id="aes_cipher">AES<span class="layui-badge-dot"></span></a></dd>
+                  <dd><a href="javascript:;" id="des_cipher">DES</a></dd>
+                  <dd><a href="javascript:;" id="3des_cipher">Triple-DES</a></dd>
+                </dl>
+              </li>
+              <li class="layui-nav-item">
+                  <a href="javascript:;"><i class="layui-icon" style="font-size: 14px;">&#xe857;</i>&nbsp;&nbsp;非对称算法</a>
+                  <dl class="layui-nav-child">
+                      <dd><a href="javascript:;" id="pub_out">公钥提取</a></dd>
+                      <dd><a href="javascript:;" id="pub_sys">公钥解析</a></dd>
+                    <dd><a href="javascript:;" id="public_cipher">公钥加解密</a></dd>
+                    <dd><a href="javascript:;" id="PRE_cer">私钥加解密<span class="layui-badge-dot"></span></a></dd>
+                    <dd><a href="javascript:;" id="pub_prev">公私钥校验</a></dd>
+                    <dd><a href="javascript:;" id="pub_prev_create">密钥对生成</a></dd>
+                    <dd><a href="javascript:;" id="prev_xiugai">私钥密码修改<span class="layui-badge-dot"></span></a></dd>
+                  </dl>
+                </li>
+            <li class="layui-nav-item">
+              <a class="" href="javascript:;"><i class="layui-icon" style="font-size: 14px;">&#xe62a;</i>&nbsp;&nbsp;证书工具</a>
+              <dl class="layui-nav-child">
+                <dd><a href="javascript:;" id="CSR_check">CSR查看</a></dd>
+                <dd><a href="javascript:;" id="CSR_create">CSR生成<span class="layui-badge-dot"></span></a></dd>
+                <dd><a href="javascript:;" id="CER_check">证书查看</a></dd>
+                <dd><a href="javascript:;" id="CER_tron">证书格式转换</a></dd>
+                <dd><a href="javascript:;" id="RSA_check">私钥校验<span class="layui-badge-dot"></span></a></dd>
+                <dd><a href="javascript:;" id="SELF_sign">自签名证书</a></dd>
+              </dl>
+            </li>
+            <li class="layui-nav-item">
+              <a href="javascript:;"><i class="layui-icon" style="font-size: 14px;">&#xe641;</i>&nbsp;&nbsp;SSL检测</a>
+              <dl class="layui-nav-child">
+                <dd><a href="javascript:;" id="ssl_handle">握手探测</a></dd>
+                <dd><a href="javascript:;" id="ssl_taojian">协议/加密套件</a></dd>
+                <dd><a href="javascript:;" id="ssl_vules">漏洞扫描<span class="layui-badge-dot"></span></a></dd>
+                <dd><a href="javascript:;" id="ssl_scheck"><i class="layui-icon" style="color:#FF5722;">&#xe62c;</i>&nbsp;健康评估</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="content">
+            <ul class="layui-tab-title">                       
+            </ul>
+            <div class="layui-tab-content">
+            </div>
+      </div>
+    <script src="../static/layui-v2.2.45/layui/layui.js"></script>
+    <script>
+    //JavaScript代码区域
+    layui.use(['element','layer'], function(){
+      var element = layui.element,
+          $=layui.jquery,
+          layer=layui.layer;
+    
+    //初始化加载
+    this_console=$.ajax({url:"/this_console",async:false});
+    CreateTab("00","<i class='layui-icon'>&#xe68e;</i>&nbsp;控制台",this_console.responseText);
+    
+    //判断tab是否已存在，存在则切换到相关tab
+    function CreateTab(tab_id,tab_title,tab_content){
+      var lia=$("li[lay-id="+tab_id+"]").length;
+      if (lia > 0){
+        element.tabChange('content', tab_id);
+      }
+      else{
+        element.tabAdd('content', {
+          title: tab_title,
+          content: tab_content,
+          id: tab_id
+        });
+        element.tabChange('content', tab_id);
+      }
+    }
+     //Gmssl国密
+     $('#gmssl').on('click', function(){
+      th_gmssl=$.ajax({url:"/gmssl",async:false});
+      CreateTab("11","GmSSL国密",th_gmssl.responseText);
+      return false;
+    });
+     //登录日志
+     $('#log').on('click', function(){
+      logs=$.ajax({url:"/log",async:false});
+      CreateTab("22","登录日志",logs.responseText);
+      return false;
+    });
+    //公钥提取
+    $('#pub_out').on('click', function(){
+      CreateTab("33","证书格式转换","暂无此功能！");
+    });
+    //公钥解析
+    $('#pub_sys').on('click', function(){
+      CreateTab("44","证书格式转换","暂无此功能！");
+    });
+    //公钥加解密
+    $('#public_cipher').on('click', function(){
+      CreateTab("55","证书格式转换","暂无此功能！");
+    });
+    //公私钥校验
+    $('#pub_prev').on('click', function(){
+      CreateTab("66","证书格式转换","暂无此功能！");
+    });
+    //密钥对生成
+    $('#pub_prev_create').on('click', function(){
+      CreateTab("77","证书格式转换","暂无此功能！");
+    });
+    //私钥密码修改
+    $('#prev_xiugai').on('click', function(){
+      CreateTab("88","证书格式转换","暂无此功能！");
+    });
+    //CSR查看
+    $('#CSR_check').on('click', function(){
+      csr_check=$.ajax({url:"/csr_check",async:false});
+      CreateTab("99","CSR查看",csr_check.responseText);
+    });
+    //CSR生成
+    $('#CSR_create').on('click', function(){
+      csr_create=$.ajax({url:"/csr_create",async:false});
+      CreateTab("100","CSR生成",csr_create.responseText);
+    });
+    //证书查看
+    $('#CER_check').on('click', function(){
+      cer_check=$.ajax({url:"/cer_check",async:false});
+      CreateTab("101","证书查看",cer_check.responseText);
+    });
+    //公私钥校验
+    $('#RSA_check').on('click', function(){
+      rsa_check=$.ajax({url:"/rsa_check",async:false});
+      CreateTab("102","公私钥校验",rsa_check.responseText);
+    });
+    //私钥加解密
+    $('#PRE_cer').on('click', function(){
+      pre_cer=$.ajax({url:"/pre_cer",async:false});
+      CreateTab("103","私钥加解密",pre_cer.responseText);
+    });
+    //证书格式转换
+    $('#CER_tron').on('click', function(){
+      CreateTab("104","证书格式转换","暂无此功能！");
+    });
+    //自签名证书
+    $('#SELF_sign').on('click', function(){
+      CreateTab("105","证书格式转换","暂无此功能！");
+    });
+    //握手探测
+    $('#ssl_handle').on('click', function(){
+      drown_attack=$.ajax({url:"/ssl_woshou",async:false});
+      CreateTab("106","SSL握手过程探测",drown_attack.responseText);
+    });
+    //协议/加密套件
+    $('#ssl_taojian').on('click', function(){
+      logjam_attack=$.ajax({url:"/ssl_xieyi_taojian",async:false});
+      CreateTab("107","协议/加密套件",logjam_attack.responseText);
+    });
+    //漏洞扫描
+    $('#ssl_vules').on('click', function(){
+      crime_attack=$.ajax({url:"/vuls_check",async:false});
+      CreateTab("108","SSL漏洞扫描",crime_attack.responseText);
+    });
+    //深度检查
+    $('#ssl_scheck').on('click', function(){
+      heart_bleed=$.ajax({url:"/ssl_deep",async:false});
+      CreateTab("109","<i class='layui-icon' style='color:#FF5722;'>&#xe62c;</i>SSL健康评估",heart_bleed.responseText);
+    });
+ 
+    //aes加解密
+    $('#aes_cipher').on('click', function(){
+      aes_cipher=$.ajax({url:"/aes_cipher",async:false});
+      CreateTab("110","AES加解密",aes_cipher.responseText);
+    });
+    //des加解密
+    $('#des_cipher').on('click', function(){
+      des_cipher=$.ajax({url:"/des_cipher",async:false});
+      CreateTab("111","DES加解密",des_cipher.responseText);
+    });
+    //3des加解密
+    $('#3des_cipher').on('click', function(){
+      tdes_cipher=$.ajax({url:"/tdes_cipher",async:false});
+      CreateTab("112","3DES加解密",tdes_cipher.responseText);
+      
+    });
+    //赞助
+    $('#gift').on('click', function(){
+       //tab层
+       layer.tab({
+        area: ['400px', '424px'],
+        tab: [{
+          title: '支付宝', 
+          content: '<img src="../static/images/pay/alibaba.png" />'
+        }, {
+          title: '微信', 
+          content: '<img src="../static/images/pay/weixin.png" />'
+        }]
+      });
+      return false;
+    });
+    // 关于
+    $('#abort').on('click', function(){
+      tdes_cipher=$.ajax({url:"/abort",async:false});
+      CreateTab("113","关于",tdes_cipher.responseText);
+      return false;
+    });
+    ///
+    });
+    </script>
+</body>
+</html>

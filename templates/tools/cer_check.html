@@ -1,0 +1,52 @@
+<div class="layui-container">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md2"></div>
+        <div class="layui-col-md8">
+            <form class="layui-form" action="">
+                <div class="layui-form-item layui-form-text">
+                    <pre>
+                    <textarea name="cer_content" placeholder="输入证书内容" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:350px;"></textarea>
+                    </pre>
+                </div>
+                <div class="layui-form-item" style="text-align:center;">
+                    <button class="layui-btn" lay-submit="" lay-filter="cer_check">查看证书内容</button>
+                </div>
+            </form>
+        </div>
+        <div class="layui-col-md2"></div>
+    </div>
+</div>
+        
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+        layui.use('form', function(){
+          var form = layui.form,
+          $=layui.jquery;
+        
+          //监听提交
+          form.on('submit(cer_check)', function(data){
+            var form_value=data.field;
+            $.ajax({
+                type:"POST",
+                url:"/cer/cer_check",
+                data:data.field,
+                dataType: "html",
+                success: function(data){
+                    //页面层
+                    layer.open({
+                        type: 1,
+                        title:'结果',
+                        area: ['70%','80%'], //宽高
+                        content: data,
+                        cancel: function(index, layero){
+                            //关闭所有弹出层
+                            layer.closeAll();
+                            return false;
+                          }
+                    });
+                }
+            });
+            return false;
+          });
+        });
+        </script>

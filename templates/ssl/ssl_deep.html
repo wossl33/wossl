@@ -1,0 +1,50 @@
+<div class="layui-container">
+        <div class="layui-row" style="height:100px;">
+        </div>
+        <form class="layui-form" action="">
+            <div class="layui-row layui-col-space8">
+                <div class="layui-col-md2"></div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item layui-form-text">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="域名或IP地址" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md1">
+                        <div class="layui-form-item">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="端口" class="layui-input" style="width:56px;">
+                        </div>
+                    </div>
+                <div class="layui-col-md1">
+                    <div class="layui-form-item">
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon">&#xe615;</i>检测</button>
+                    </div>
+                </div>
+                <div class="layui-col-md2"></div>
+            </div>
+        </form>
+        <div class="layui-row layui-col-space8">
+            <div class="layui-col-md2"></div>
+            <div class="layui-col-md8">
+                <blockquote class="layui-elem-quote layui-quote-nm" style="color:#666;">
+                        获取服务端支持的协议/加密套件、是否存在SSL常见漏洞、证书及证书链等。
+                </blockquote>
+            </div>
+            <div class="layui-col-md2"></div>
+        </div>
+    </div>
+            
+            <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+            <script>
+            layui.use('form', function(){
+              var form = layui.form
+              
+              //监听提交
+              form.on('submit(demo1)', function(data){
+                layer.alert(JSON.stringify(data.field), {
+                  title: '暂无此功能！'
+                })
+                return false;
+              });
+              form.render();
+            });
+            </script>

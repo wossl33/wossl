@@ -1,0 +1,230 @@
+<div class="layui-container">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md3"></div>
+        <div class="layui-col-md6">
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;通用名CN</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="com_name" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="站点的域名，例如：www.baidu.com" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门OU</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="bumen_name" placeholder="部门名称，例如：技术部" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;组织O</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="zuzhi_name" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="机构名称，例如：百度科技有限公司" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;城市L</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="city_name" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="市级地区，例如：武汉" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;省份S</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="shengfen_name" lay-verify="required" lay-verType="tips" autocomplete="off" placeholder="省级地区，例如：湖北" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;国家C</label>
+                    <div class="layui-input-block">
+                        <select name="guojia_name" lay-verify="required" lay-verType="tips">
+                            <option value="">选择所属国家</option>
+                            <option value="CN">CN(中国)</option>
+                            <option value="HK">HK(中国-香港)</option>
+                            <option value="MO">MO(中国-澳门)</option>
+                            <option value="TW">TW(中国-台湾)</option>
+                            <option value="PK">PK(巴基斯坦)</option>
+                            <option value="FR">FR(法国)</option>
+                            <option value="DE">DE(德国)</option>
+                            <option value="US">US(美国)</option>
+                            <option value="GB">GB(英国)</option>
+                            <option value="IN">IN(印度)</option>
+                            <option value="VN">VN(越南)</option>
+                            <option value="KH">KH(柬埔寨)</option>
+                            <option value="MM">MM(缅甸)</option>
+                            <option value="PH">PH(菲律宾)</option>
+                            <option value="IL">IL(以色列)</option>
+                            <option value="JP">JP(日本)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;密钥算法</label>
+                    <div class="layui-input-block">
+                        <select name="mysf" lay-filter="mysf" lay-verify="required" lay-verType="tips">
+                            <option value="">选择算法</option>
+                            <option value="RSA">RSA</option>
+                            <option value="DSA">DSA</option>
+                            <option value="ECDSA">ECDSA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><u>更多设置</u>
+                        <a href="javascript:;" id="more">
+                        <i class="layui-icon up icon-hidden">&#xe619;</i>
+                        <i class="layui-icon down">&#xe61a;</i>
+                        </a>
+                    </label>
+                </div>
+                <div class="layui-form-item more_show">
+                    <label class="layui-form-label">备用名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="beiyong_name" lay-verify="title" autocomplete="off" placeholder="备用域名，如www.baidu.com，用逗号分割。" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item more_show">
+                    <label class="layui-form-label">密钥强度</label>
+                    <div class="layui-input-block">
+                        <select name="myqd" id='myqd'>
+                            <option value="">选择强度</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item more_show">
+                    <label class="layui-form-label">签名算法</label>
+                    <div class="layui-input-block">
+                        <select name="qmsf" id="qmsf">
+                            <option value="">选择算法</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item more_show">
+                    <label class="layui-form-label">KEY密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="key_pass" autocomplete="off" placeholder="私钥密码，可不设置；如设置，请妥善保存" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item" style="text-align:center;">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="csr_create">生成CSR文件</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-col-md3"></div>
+    </div>
+</div>
+<style type="text/css">
+    .icon-hidden{
+        display: none;
+    }
+    .more_show{
+        display: none;
+    }
+</style>
+  <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use('form', function(){
+        var form = layui.form
+        $=layui.jquery;
+        //select切换联动
+        form.on('select(mysf)', function(data){
+          console.log(data.value); //得到被选中的值
+          if (data.value == 'RSA'){
+            //密钥强度更新
+            $("select#myqd option").each(function(){
+                $(this).remove();
+            });
+            $("select#qmsf option").each(function(){
+                $(this).remove();
+            });
+            $("select#myqd").append("<option value=''>选择强度</option>");
+            $("select#myqd").append("<option value='1024'>1024</option>");
+            $("select#myqd").append("<option value='2048'>2048</option>");
+            $("select#myqd").append("<option value='3072'>3072</option>");
+            $("select#myqd").append("<option value='4096'>4096</option>");
+            //签名算法更新
+            $("select#qmsf").append("<option value=''>选择算法</option>");
+            $("select#qmsf").append("<option value='MD5'>MD5</option>");
+            $("select#qmsf").append("<option value='SHA1'>SHA1</option>");
+            $("select#qmsf").append("<option value='SHA224'>SHA224</option>");
+            $("select#qmsf").append("<option value='SHA256'>SHA256</option>");
+            $("select#qmsf").append("<option value='SHA384'>SHA384</option>");
+            $("select#qmsf").append("<option value='SHA512'>SHA512</option>");
+          }
+          else if(data.value == 'DSA'){
+            $("select#myqd option").each(function(){
+                $(this).remove();
+            });
+            $("select#qmsf option").each(function(){
+                $(this).remove();
+            });
+            //密钥强度更新
+            $("select#myqd").append("<option value=''>选择强度</option>");
+            $("select#myqd").append("<option value='1024'>1024</option>");
+            $("select#myqd").append("<option value='2048'>2048</option>");
+            $("select#myqd").append("<option value='3072'>3072</option>");
+            //签名算法更新
+            $("select#qmsf").append("<option value=''>选择算法</option>");
+            $("select#qmsf").append("<option value='SHA1'>SHA1</option>");
+            $("select#qmsf").append("<option value='SHA224'>SHA224</option>");
+            $("select#qmsf").append("<option value='SHA256'>SHA256</option>");
+          }
+          else if(data.value == 'ECDSA'){
+            $("select#myqd option").each(function(){
+                $(this).remove();
+            });
+            $("select#qmsf option").each(function(){
+                $(this).remove();
+            });
+            //密钥强度更新
+            $("select#myqd").append("<option value=''>选择强度</option>");
+            $("select#myqd").append("<option value='P192'>P192</option>");
+            $("select#myqd").append("<option value='P224'>P224</option>");
+            $("select#myqd").append("<option value='P256'>P256</option>");
+            $("select#myqd").append("<option value='P384'>P384</option>");
+            $("select#myqd").append("<option value='P512'>P512</option>");
+            //签名算法更新
+            $("select#qmsf").append("<option value=''>选择算法</option>");
+            $("select#qmsf").append("<option value='SHA1'>SHA1</option>");
+            $("select#qmsf").append("<option value='SHA224'>SHA224</option>");
+            $("select#qmsf").append("<option value='SHA256'>SHA256</option>");
+            $("select#qmsf").append("<option value='SHA384'>SHA384</option>");
+            $("select#qmsf").append("<option value='SHA512'>SHA512</option>");
+          }
+          form.render('select'); //刷新select选择框渲染
+        }); 
+        // 高级设置切换
+        $("a#more").on('click',function(){
+            $(this).children('.up').toggleClass('icon-hidden');
+            $(this).children('.down').toggleClass('icon-hidden');
+            $("div.more_show").toggle();
+        });
+        //监听提交
+        form.on('submit(csr_create)', function(data){
+            var form_value=data.field;
+            $.ajax({
+                type:"POST",
+                url:"/csr/csr_create",
+                data:data.field,
+                dataType: "html",
+                success: function(data){
+                    //页面层
+                    layer.open({
+                        type: 1,
+                        title:'结果',
+                        area: ['70%','80%'], //宽高
+                        content: data,
+                        cancel: function(index, layero){
+                            //关闭所有弹出层
+                            layer.closeAll();
+                            return false;
+                          }
+                    });
+                }
+            });
+            return false;
+          });
+        form.render();
+    });
+</script>

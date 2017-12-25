@@ -1,0 +1,53 @@
+<div class="loading_flag" style="display:none;">{{ aes_result['error'] }}</div>
+{% if aes_result['error'] %}
+<style type="text/css">
+    .left-echo{
+        text-align: right;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        border-right:1px solid #e6e6e6;
+      } 
+    .right-echo{
+        padding-left: 10px;
+        padding-bottom: 10px;
+      }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:20px;">
+    <div class="layui-col-md1">&nbsp;</div>
+    <div class="layui-col-md10">
+        <div style="color:#009688;">{{ flag }}<hr></div>
+        <div class="layui-row">
+            <div class="layui-col-md2 left-echo">明/密文</div>
+            <div class="layui-col-md10 right-echo">
+            <div style="border:solid 1px #d2d2d2;padding:10px;text-align:left;color:#333;"><pre>{{ aes_result['msg'] }}</pre></div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md1">&nbsp;</div>
+    </div>
+</div>
+{% else %}
+<style type="text/css">
+    .error-show{
+        text-align: center;
+    }
+</style>
+<div class="layui-container" style="width:100%;">
+    <div class="layui-row" style="margin-top:28%;">
+        <div class="error-show"><i class="layui-icon" style="font-size: 30px; color: #FF5722">&#xe69c;</i>&nbsp;&nbsp;{{ aes_result['msg'] }}</div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+        layui.use('layer', function(){
+            var layer = layui.layer,
+            $=layui.jquery;
+            //time设置为0永远不自动关闭，shade为0表示去遮罩。
+            var loading_index = layer.msg('加载中...', {icon: 16,time:0,shade:0});
+            if ($('div .loading_flag').val != null || $('div .loading_flag').val !="" || $('div .loading_flag').val !=undefined){
+                layer.close(loading_index);
+            }
+        });
+    </script>
