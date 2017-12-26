@@ -15,7 +15,7 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ##### 测试环境
 切换至wossl目录,运行python run.py
 ##### 生产环境
-<br>推荐：nginx + gunicorn + flask
+推荐：nginx + gunicorn + flask
 <br>例如Centos 7.0下，建立系统服务wossld.service：
 ```
 [Unit]
