@@ -34,6 +34,3 @@ WantedBy=multi-user.target
 <br>服务启动：service wossld start
 <br>服务停止：service wossld stop
 <br>flask生产环境部署请参考：http://docs.jinkan.org/docs/flask/deploying/wsgi-standalone.html
-### 赞助
-![支付宝](https://gitee.com/uploads/images/2017/1225/180427_0be229c7_1700467.png "支付宝")
-![微信](https://gitee.com/uploads/images/2017/1225/180531_9ac72dec_1700467.png "微信")
