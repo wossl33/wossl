@@ -33,8 +33,8 @@
         </ul>
       </div>
       
-      <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
+      <div class="layui-side">
+        <div class="layui-side-scroll layui-bg-black">
           <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
           <ul class="layui-nav layui-nav-tree"  lay-filter="test">
               <li class="layui-nav-item layui-nav-itemed">
@@ -130,19 +130,23 @@
     });
     //公钥提取
     $('#pub_out').on('click', function(){
-      CreateTab("33","证书格式转换","暂无此功能！");
+      p_tiqu=$.ajax({url:"/feis/pub_tiqu",async:false});
+      CreateTab("33","公钥提取",p_tiqu.responseText);
     });
     //公钥解析
     $('#pub_sys').on('click', function(){
-      CreateTab("44","证书格式转换","暂无此功能！");
+      p_asysi=$.ajax({url:"/feis/pub_asysi",async:false});
+      CreateTab("44","公钥解析",p_asysi.responseText);
     });
     //公钥加解密
     $('#public_cipher').on('click', function(){
-      CreateTab("55","证书格式转换","暂无此功能！");
+      p_jjm=$.ajax({url:"/feis/pub_jjm",async:false});
+      CreateTab("55","公钥加解密",p_jjm.responseText);
     });
     //公私钥校验
     $('#pub_prev').on('click', function(){
-      CreateTab("66","证书格式转换","暂无此功能！");
+      pp_check=$.ajax({url:"/feis/pub_priv",async:false});
+      CreateTab("66","公私钥校验",pp_check.responseText);
     });
     //密钥对生成
     $('#pub_prev_create').on('click', function(){
