@@ -12,6 +12,9 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ![预览2](https://gitee.com/uploads/images/2017/1225/181103_37ea20ce_1700467.png "预览2")
 ![预览3](https://gitee.com/uploads/images/2017/1225/181114_496249dd_1700467.png "预览3")
 ### 项目部署
+##### 测试环境
+切换至wossl目录,运行python run.py
+##### 生产环境
 <br>推荐：nginx + gunicorn + flask
 <br>例如Centos 7.0下，建立系统服务wossld.service：
 ```
