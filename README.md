@@ -12,6 +12,28 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ![预览2](https://gitee.com/uploads/images/2017/1225/181103_37ea20ce_1700467.png "预览2")
 ![预览3](https://gitee.com/uploads/images/2017/1225/181114_496249dd_1700467.png "预览3")
 ### 项目部署
+<br>推荐：nginx + gunicorn + flask
+<br>例如Centos 7.0下，建立系统服务wossld.service：
+```
+[Unit]
+Description=Gunicorn Demo
+After=network.target
+
+[Service]
+User=root
+Group=root
+PIDFile=/tmp/gunicorn.pid
+WorkingDirectory=/root/wossl 项目路径
+ExecStart=/usr/bin/gunicorn -c wsgi_config.py wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target 
+```
+<br>服务启动：service wossld start
+<br>服务停止：service wossld stop
+<br>flask生产环境部署请参考：http://docs.jinkan.org/docs/flask/deploying/wsgi-standalone.html
 ### 赞助
 ![支付宝](https://gitee.com/uploads/images/2017/1225/180427_0be229c7_1700467.png "支付宝")
 ![微信](https://gitee.com/uploads/images/2017/1225/180531_9ac72dec_1700467.png "微信")
