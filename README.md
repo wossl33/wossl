@@ -39,7 +39,7 @@ WantedBy=multi-user.target
 <br>服务启动：service wossld start
 <br>服务停止：service wossld stop
 <br>flask生产环境部署请参考：http://docs.jinkan.org/docs/flask/deploying/wsgi-standalone.html
-##### 获取客户端IP
+##### 获取客户端IP:
 views.py:
 ```
 # 首页
