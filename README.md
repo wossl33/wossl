@@ -15,7 +15,7 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ![预览3](https://gitee.com/uploads/images/2017/1225/181114_496249dd_1700467.png "预览3")
 ### 项目部署
 ##### 测试环境
-切换至wossl目录,运行python run.py
+切换至工作目录,运行python run.py
 ##### 生产环境
 推荐：nginx + gunicorn + flask
 <br>例如Centos 7.0下，建立系统服务wossld.service：
@@ -39,3 +39,20 @@ WantedBy=multi-user.target
 <br>服务启动：service wossld start
 <br>服务停止：service wossld stop
 <br>flask生产环境部署请参考：http://docs.jinkan.org/docs/flask/deploying/wsgi-standalone.html
+##### 获取客户端IP
+views.py:
+```
+# 首页
+@app.route('/')
+def index():
+    # 测试环境下获取客户端IP
+    client_ip=request.remote_addr
+    # 生产环境下获取客户端IP
+    '''
+    if request.headers['X-Real-IP']:
+        client_ip=request.headers['X-Real-IP']
+    else:
+        client_ip=request.headers['X-Forwarded-For']
+    '''
+    return render_template('index.html',client_ip=client_ip)
+```
