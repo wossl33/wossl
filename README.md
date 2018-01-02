@@ -10,7 +10,7 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ##### 开发环境：
 基于Python2.7，具体依赖库请参考requirements或pip install requirements在线安装。
 ##### 托管
-- 官网：www.wossl.org:808
+- 官网：http://www.wossl.org:808
 - 码云：https://gitee.com/wossl33/wossl
 - Github:https://github.com/wossl33/wossl
 ### 预览
