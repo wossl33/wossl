@@ -9,6 +9,10 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 - SSL检测：握手过程探测、协议/加密套件、SSL常见漏洞扫描、SSL健康检查等。
 ##### 开发环境：
 基于Python2.7，具体依赖库请参考requirements或pip install requirements在线安装。
+##### 托管
+官网：www.wossl.org:808
+码云：https://gitee.com/wossl33/wossl
+Github:https://github.com/wossl33/wossl
 ### 预览
 ![浏览1](https://gitee.com/uploads/images/2018/0102/120319_153356a7_1700467.png "浏览1")
 ![浏览2](https://gitee.com/uploads/images/2018/0102/120339_8f796ee9_1700467.png "浏览2")
