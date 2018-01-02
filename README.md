@@ -57,9 +57,9 @@ def index():
     return render_template('index.html',client_ip=client_ip)
 ```
 ##### 更新日志
-###### 1.1.0
-实现pem格式CSR的结构查看功能，可导出public_key明文。
-实现pem格式CSR生成功能，可根据RSA、DSA、ECDSA等不同的加密算法，以及加密强度和签名算法，生成CSR和私钥对。
-实现pem格式证书的结构查看功能，可导出public_key明文。
-实现公私钥校验功能，可校验证书与私钥、证书与CSR以及CSR与私钥之间的匹配关系。
-实现私钥的加解密功能，对私钥进行加密，对加密后私钥进行解密。
+###### v1.1.0
+-实现pem格式CSR的结构查看功能，可导出public_key明文。
+-实现pem格式CSR生成功能，可根据RSA、DSA、ECDSA等不同的加密算法，以及加密强度和签名算法，生成CSR和私钥对。
+-实现pem格式证书的结构查看功能，可导出public_key明文。
+-实现公私钥校验功能，可校验证书与私钥、证书与CSR以及CSR与私钥之间的匹配关系。
+-实现私钥的加解密功能，对私钥进行加密，对加密后私钥进行解密。
