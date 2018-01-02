@@ -1,12 +1,12 @@
 <style type="text/css">
-    /* 宫格 */
+  /* 宫格 */
 .site-doc-icon{margin-bottom: 50px; font-size: 0;color: #393D49;}
-.site-doc-icon li{display: inline-block; vertical-align: middle; width: 127px; line-height: 40px; padding: 30px; margin-right: -1px; margin-bottom: -1px; border: 1px solid #e2e2e2; font-size: 14px; text-align: center; color: #666; transition: all .3s; -webkit-transition: all .3s;}
+.site-doc-icon li{display: inline-block; vertical-align: middle; width: 127px; line-height: 40px; padding: 30px; margin-right: -1px; margin-bottom: -1px; border: 1px solid #e2e2e2; font-size: 14px; text-align: center; color: #00c1de; transition: all .3s; -webkit-transition: all .3s;}
 .site-doc-icon li .layui-icon{display: inline-block; font-size: 36px;}
 
 .site-doc-icon li .fontclass{display: none;}
-.site-doc-icon li:hover{background-color: #F0F0F0; color: #009688;}
-.site-doc-icon li a:hover{color: #009688;}
+.site-doc-icon li:hover{background-color: #F0F0F0; color: #00c1de;}
+.site-doc-icon li a:hover{color: #00c1de;}
 
 @font-face {font-family: "iconfont";
 src: url('../static/cm-font/iconfont.eot'); /* IE9*/
@@ -33,98 +33,98 @@ font-style:normal;
 <div class="layui-col-md6">
 <div style="margin-top:20%;">
 <ul class="site-doc-icon">
-        <li>
-          <i class="iconfont">&#58897;</i>
-          <div><a href="" id="console_vuls_check">SSL漏洞扫描</a></div>
-        </li>
-        
-        <li>
-          <i class="iconfont">&#58928;</i>
-          <div><a href=""id="console_csr_create">CSR生成</a></div>
-        </li>
-        
-        <li>
-          <i class="iconfont">&#58980;</i>
-          <div><a href="" id="console_cer_check">证书查看</a></div>
-        </li>
-        
-        <li>
-          <i class="iconfont">&#58944;</i>
-          <div><a href="" id="console_rsa_check">公私钥校验</a></div>
-        </li>
-        
-        <li>
-          <i class="iconfont">&#58934;</i>
-          <div><a href="" id="console_pre_cer">私钥加解密</a></div>
-        </li>
+      <li>
+        <i class="iconfont">&#58897;</i>
+        <div><a href="" id="console_vuls_check">SSL漏洞扫描</a></div>
+      </li>
       
-        <li>
-          <i class="iconfont">&#58968;</i>
-          <div><a href="" id="console_pro_suites">哈希计算</a></div>
-        </li>
-    </ul>
+      <li>
+        <i class="iconfont">&#58928;</i>
+        <div><a href=""id="console_csr_create">CSR生成</a></div>
+      </li>
+      
+      <li>
+        <i class="iconfont">&#58980;</i>
+        <div><a href="" id="console_cer_check">证书查看</a></div>
+      </li>
+      
+      <li>
+        <i class="iconfont">&#58944;</i>
+        <div><a href="" id="console_rsa_check">公私钥校验</a></div>
+      </li>
+      
+      <li>
+        <i class="iconfont">&#58934;</i>
+        <div><a href="" id="console_pre_cer">私钥加解密</a></div>
+      </li>
+    
+      <li>
+        <i class="iconfont">&#58968;</i>
+        <div><a href="" id="console_pro_suites">哈希计算</a></div>
+      </li>
+  </ul>
+  </div>
     </div>
-      </div>
-        <div class="layui-col-md3"></div>
-      </div>
+      <div class="layui-col-md3"></div>
     </div>
-    <script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-      var element = layui.element,
-          $=layui.jquery;
-          
-    //判断tab是否已存在，存在则切换到相关tab
-    function CreateTab(tab_id,tab_title,tab_content){
-      var lia=$("li[lay-id="+tab_id+"]").length;
-      if (lia > 0){
-        element.tabChange('content', tab_id);
-      }
-      else{
-        element.tabAdd('content', {
-          title: tab_title,
-          content: tab_content,
-          id: tab_id
-        });
-        element.tabChange('content', tab_id);
-      }
+  </div>
+  <script>
+  //JavaScript代码区域
+  layui.use('element', function(){
+    var element = layui.element,
+        $=layui.jquery;
+        
+  //判断tab是否已存在，存在则切换到相关tab
+  function CreateTab(tab_id,tab_title,tab_content){
+    var lia=$("li[lay-id="+tab_id+"]").length;
+    if (lia > 0){
+      element.tabChange('content', tab_id);
     }
-    //SSL漏洞扫描
-     $('#console_vuls_check').on('click', function(){
-      vuls_check=$.ajax({url:"/vuls_check",async:false});
-      CreateTab("108","SSL漏洞扫描",vuls_check.responseText);
-      return false;
-    });
-    //CSR生成
-    $('#console_csr_create').on('click', function(){
-      c_csr_create=$.ajax({url:"/csr_create",async:false});
-      CreateTab("100","CSR生成",c_csr_create.responseText);
-      return false;
-    });
-    //证书查看
-    $('#console_cer_check').on('click', function(){
-      c_cer_check=$.ajax({url:"/cer_check",async:false});
-      CreateTab("101","证书查看",c_cer_check.responseText);
-      return false;
-    });
-    //公私钥校验
-    $('#console_rsa_check').on('click', function(){
-      c_rsa_check=$.ajax({url:"/rsa_check",async:false});
-      CreateTab("102","公私钥校验",c_rsa_check.responseText);
-      return false;
-    });
-    //私钥加解密
-    $('#console_pre_cer').on('click', function(){
-      c_pre_check=$.ajax({url:"/pre_cer",async:false});
-      CreateTab("103","私钥加解密",c_pre_check.responseText);
-      return false;
-    });
-    //协议/加密套件
-    $('#console_pro_suites').on('click', function(){
-      c_pro_suites=$.ajax({url:"/hashs/cry_hash",async:false});
-      CreateTab("200","哈希计算",c_pro_suites.responseText);
-      return false;
-    });
-    //
-    });
-    </script>
+    else{
+      element.tabAdd('content', {
+        title: tab_title,
+        content: tab_content,
+        id: tab_id
+      });
+      element.tabChange('content', tab_id);
+    }
+  }
+  //SSL漏洞扫描
+   $('#console_vuls_check').on('click', function(){
+    vuls_check=$.ajax({url:"/vuls_check",async:false});
+    CreateTab("108","SSL漏洞扫描",vuls_check.responseText);
+    return false;
+  });
+  //CSR生成
+  $('#console_csr_create').on('click', function(){
+    c_csr_create=$.ajax({url:"/csr_create",async:false});
+    CreateTab("100","CSR生成",c_csr_create.responseText);
+    return false;
+  });
+  //证书查看
+  $('#console_cer_check').on('click', function(){
+    c_cer_check=$.ajax({url:"/cer_check",async:false});
+    CreateTab("101","证书查看",c_cer_check.responseText);
+    return false;
+  });
+  //公私钥校验
+  $('#console_rsa_check').on('click', function(){
+    c_rsa_check=$.ajax({url:"/rsa_check",async:false});
+    CreateTab("102","公私钥校验",c_rsa_check.responseText);
+    return false;
+  });
+  //私钥加解密
+  $('#console_pre_cer').on('click', function(){
+    c_pre_check=$.ajax({url:"/pre_cer",async:false});
+    CreateTab("103","私钥加解密",c_pre_check.responseText);
+    return false;
+  });
+  //协议/加密套件
+  $('#console_pro_suites').on('click', function(){
+    c_pro_suites=$.ajax({url:"/hashs/cry_hash",async:false});
+    CreateTab("200","哈希计算",c_pro_suites.responseText);
+    return false;
+  });
+  //
+  });
+  </script>

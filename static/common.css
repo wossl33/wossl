@@ -1,0 +1,90 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+a.header-logo{
+    font-weight:400;
+    color:#f2f2f2;
+}
+a.header-logo:hover{
+    font-weight:400;
+    color:#f2f2f2; 
+}
+.div_footer{
+    width: 100%;
+    text-align: center;
+    height: 120px;
+    background-color: #393D49;
+    display:table;
+    margin-top: 20px;
+}
+.div_footer_div{
+    color: rgba(255,255,255,.7);
+    display:table-cell;
+    vertical-align:middle;
+}
+.fly_header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    height: 60px;
+    border-radius: 0;
+}
+.layui-btn{
+    background-color:#00c1de;
+}
+.layui-nav-child{
+    top:60px;
+    padding: 0 0
+}
+.layui-nav .layui-nav-child a:hover{
+    background-color:#00c1de;
+    color: #f2f2f2;
+}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this{
+    background-color:#00c1de;
+    color: #f2f2f2;
+}
+.layui-form-danger:focus{
+    border-color: #00c1de !important;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+.layui-form-radio i:hover, .layui-form-radioed i{
+    color: #00c1de;
+}
+.footer_a a{
+    color: #777;
+}
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+    background: none;
+}
+.layui-form-item-input {
+	margin-bottom: 0px;
+	clear: both;
+    *zoom: 1;
+}
+.zhong_biaoti{
+    color:#00c1de;
+}
+.zhong_biaoti_index{
+    color:#393D49;
+}
+.layui-textarea {
+	min-height: 100px;
+	height: auto;
+	padding: 6px 10px;
+    resize: vertical;
+    color: #393D49;
+}
+.layui-form-select dl dd.layui-this {
+	background-color: #00c1de;
+	color: #fff;
+}
+.layui-col-space10{
+    margin-bottom: -20px;
+}
