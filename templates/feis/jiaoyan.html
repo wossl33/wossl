@@ -4,30 +4,26 @@
                 <div class="layui-col-md6">
                     <div class="layui-form-item layui-form-text">
                         <pre>
-                        <textarea placeholder="输入证书/CSR内容" name="cer_csr" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:350px;"></textarea>
+                        <textarea placeholder="输入公钥内容" name="public_key" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:350px;"></textarea>
                         </pre>
-                    </div>
-                    <div class="layui-form-item">
-                        <input type="radio" name="suite_type" lay-filter="rsa_radio" value="1" title="证书与私钥" checked="">
-                        <input type="radio" name="suite_type" lay-filter="rsa_radio" value="2" title="证书与CSR">
-                        <input type="radio" name="suite_type" lay-filter="rsa_radio" value="3" title="CSR与私钥">
                     </div>
                 </div>
                 <div class="layui-col-md6">
                     <div class="layui-form-item layui-form-text">
                         <pre>
-                        <textarea placeholder="输入CSR/密钥内容" name="csr_pri" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:350px;"></textarea>
+                        <textarea placeholder="输入私钥内容" name="private_key" class="layui-textarea" lay-verify="required" lay-verType="tips" style="height:350px;"></textarea>
                         </pre>
                     </div> 
-                    <div class="layui-form-item" id="key">
-                        <input type="password" name="key" autocomplete="off" placeholder="KEY密码" class="layui-input">
-                    </div>
                 </div>
             </div>
             <div class="layui-row">
-                    
+                <div class="layui-form-item" id="key">
+                    <input type="password" name="key" autocomplete="off" placeholder="KEY密码，若私钥未加密无需填写" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-row">
                 <div class="layui-form-item" style="text-align:center;">
-                    <button class="layui-btn" lay-submit="" lay-filter="rsa_check">匹配校验</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="pub_priv_check">匹配校验</button>
                 </div> 
             </div>
         </form>
@@ -44,24 +40,12 @@
               var form = layui.form,
               $=layui.jquery;
               
-              //form.init();
-              form.render('radio');
-              //监听radio选中事件
-              form.on('radio(rsa_radio)', function(data){
-                //被点击的radio的value值
-                if (data.value == 2){
-                    $('div#key').addClass('hidden_key');
-                }
-                else if($('div#key').hasClass('hidden_key')){
-                    $('div#key').removeClass('hidden_key');
-                }
-              });
               //监听提交
-              form.on('submit(rsa_check)', function(data){
+              form.on('submit(pub_priv_check)', function(data){
                 var form_value=data.field;
                 $.ajax({
                     type:"POST",
-                    url:"/rsa/rsa_check",
+                    url:"/feis/pub_priv_hander",
                     data:data.field,
                     dataType: "html",
                     success: function(data){

@@ -163,11 +163,13 @@
     });
     //密钥对生成
     $('#pub_prev_create').on('click', function(){
-      CreateTab("77","证书格式转换","暂无此功能！");
+      pub_priv=$.ajax({url:"/feis/pub_key_create",async:false});
+      CreateTab("77","密钥对生成",pub_priv.responseText);
     });
     //私钥密码修改
     $('#prev_xiugai').on('click', function(){
-      CreateTab("88","证书格式转换","暂无此功能！");
+      priv_xiugai=$.ajax({url:"/feis/priv_xiugai",async:false});
+      CreateTab("88","私钥密码修改",priv_xiugai.responseText);
     });
     //CSR查看
     $('#CSR_check').on('click', function(){

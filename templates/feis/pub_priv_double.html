@@ -1,0 +1,118 @@
+<div class="layui-container">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md3"></div>
+            <div class="layui-col-md6">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;密钥算法</label>
+                        <div class="layui-input-block">
+                            <select name="mysf" lay-filter="mysf" lay-verify="required" lay-verType="tips">
+                                <option value="">选择算法</option>
+                                <option value="RSA">RSA</option>
+                                <option value="DSA">DSA</option>
+                                <option value="ECDSA">ECDSA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="color:red;">*</span>&nbsp;&nbsp;密钥强度</label>
+                        <div class="layui-input-block">
+                            <select name="myqd" id='myqd' lay-verify="required" lay-verType="tips">
+                                <option value="">选择强度</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">KEY密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="key_pass" autocomplete="off" placeholder="私钥密码，可不设置；如设置，请妥善保存" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align:center;">
+                        <button class="layui-btn" lay-submit="" lay-filter="pub_priv_double">生成密钥对</button>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-col-md3"></div>
+        </div>
+    </div>
+      <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use('form', function(){
+            var form = layui.form
+            $=layui.jquery;
+            //select切换联动
+            form.on('select(mysf)', function(data){
+              console.log(data.value); //得到被选中的值
+              if (data.value == 'RSA'){
+                //密钥强度更新
+                $("select#myqd option").each(function(){
+                    $(this).remove();
+                });
+                $("select#qmsf option").each(function(){
+                    $(this).remove();
+                });
+                $("select#myqd").append("<option value=''>选择强度</option>");
+                $("select#myqd").append("<option value='1024'>1024</option>");
+                $("select#myqd").append("<option value='2048'>2048</option>");
+                $("select#myqd").append("<option value='3072'>3072</option>");
+                $("select#myqd").append("<option value='4096'>4096</option>");
+              }
+              else if(data.value == 'DSA'){
+                $("select#myqd option").each(function(){
+                    $(this).remove();
+                });
+                $("select#qmsf option").each(function(){
+                    $(this).remove();
+                });
+                //密钥强度更新
+                $("select#myqd").append("<option value=''>选择强度</option>");
+                $("select#myqd").append("<option value='1024'>1024</option>");
+                $("select#myqd").append("<option value='2048'>2048</option>");
+                $("select#myqd").append("<option value='3072'>3072</option>");
+              }
+              else if(data.value == 'ECDSA'){
+                $("select#myqd option").each(function(){
+                    $(this).remove();
+                });
+                $("select#qmsf option").each(function(){
+                    $(this).remove();
+                });
+                //密钥强度更新
+                $("select#myqd").append("<option value=''>选择强度</option>");
+                $("select#myqd").append("<option value='P192'>P192</option>");
+                $("select#myqd").append("<option value='P224'>P224</option>");
+                $("select#myqd").append("<option value='P256'>P256</option>");
+                $("select#myqd").append("<option value='P384'>P384</option>");
+                $("select#myqd").append("<option value='P512'>P512</option>");
+              }
+              form.render('select'); //刷新select选择框渲染
+            }); 
+            //监听提交
+            form.on('submit(pub_priv_double)', function(data){
+                var form_value=data.field;
+                $.ajax({
+                    type:"POST",
+                    url:"/feis/pub_priv_create_hander",
+                    data:data.field,
+                    dataType: "html",
+                    success: function(data){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            title:'结果',
+                            area: ['70%','80%'], //宽高
+                            content: data,
+                            cancel: function(index, layero){
+                                //关闭所有弹出层
+                                layer.closeAll();
+                                return false;
+                              }
+                        });
+                    }
+                });
+                return false;
+              });
+            form.render();
+        });
+    </script>
