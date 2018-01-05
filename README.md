@@ -13,6 +13,7 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 - 官网：http://www.wossl.org:808
 - 码云：https://gitee.com/wossl33/wossl
 - Github:https://github.com/wossl33/wossl
+- 交流群：364788699
 ### 预览
 ![浏览1](https://gitee.com/uploads/images/2018/0102/120319_153356a7_1700467.png "浏览1")
 ![浏览2](https://gitee.com/uploads/images/2018/0102/120339_8f796ee9_1700467.png "浏览2")
