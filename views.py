@@ -64,6 +64,9 @@ def rsa_check():
 @app.route('/pre_cer')
 def pre_cer():
     return render_template('tools/pre_cer.html')
+@app.route('/cert_create')
+def cert_create():
+    return render_template('tools/cert_create.html')
 
 # 主页侧边栏--漏洞检测
 @app.route('/vuls_check')

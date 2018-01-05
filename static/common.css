@@ -48,6 +48,15 @@ a.header-logo:hover{
     background-color:#00c1de;
     color: #f2f2f2;
 }
+.layui-form-checked, .layui-form-checked:hover {
+    border-color: #00c1de;
+}
+.layui-form-checked span, .layui-form-checked:hover span {
+    background-color: #00c1de;
+}
+.layui-form-checked i, .layui-form-checked:hover i {
+	color: #00c1de;
+}
 .layui-form-danger:focus{
     border-color: #00c1de !important;
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);

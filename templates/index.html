@@ -202,7 +202,8 @@
     });
     //自签名证书
     $('#SELF_sign').on('click', function(){
-      CreateTab("105","证书格式转换","暂无此功能！");
+      cert_create=$.ajax({url:"/cert_create",async:false});
+      CreateTab("105","自签名证书",cert_create.responseText);
     });
     //握手探测
     $('#ssl_handle').on('click', function(){

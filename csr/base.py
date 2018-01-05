@@ -4,6 +4,7 @@ from cryptography.x509.oid import NameOID
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes,serialization
 from cryptography.hazmat.primitives.asymmetric import rsa,dsa,ec
+import datetime
 import binascii
 
 # 对字符串进行按长度分割
@@ -248,3 +249,185 @@ def create_csr(com_name,bumen_name,zuzhi_name,city_name,shengfen_name,guojia_nam
         else:
             csr=csr_add_extension.sign(private_key,hashes.SHA1(),default_backend())
         return {'error':True,'csr':csr.public_bytes(serialization.Encoding.PEM),'priv_key':key}
+
+# 自签名证书创建
+def create_cert(subject_com_name,subject_bumen_name,subject_zuzhi_name,subject_city_name,subject_shengfen_name,subject_guojia_name,issuer_com_name,issuer_zuzhi_name,issuer_guojia_name,root_flag,before_time,after_time,mysf,beiyong_name,myqd,qmsf,key_pass):
+    key=None
+    builder=None
+    certificate=None
+    try:
+        if subject_bumen_name:
+            builder=x509.CertificateBuilder().subject_name(x509.Name([
+                # Provide various details about who we are.
+                x509.NameAttribute(NameOID.COUNTRY_NAME, subject_guojia_name),
+                x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, subject_shengfen_name),
+                x509.NameAttribute(NameOID.LOCALITY_NAME, subject_city_name),
+                x509.NameAttribute(NameOID.ORGANIZATION_NAME, subject_zuzhi_name),
+                x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, subject_bumen_name),
+                x509.NameAttribute(NameOID.COMMON_NAME, subject_com_name),
+                ]))
+        else:
+            builder=x509.CertificateBuilder().subject_name(x509.Name([
+                # Provide various details about who we are.
+                x509.NameAttribute(NameOID.COUNTRY_NAME, subject_guojia_name),
+                x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, subject_shengfen_name),
+                x509.NameAttribute(NameOID.LOCALITY_NAME, subject_city_name),
+                x509.NameAttribute(NameOID.ORGANIZATION_NAME, subject_zuzhi_name),
+                x509.NameAttribute(NameOID.COMMON_NAME, subject_com_name),
+                ]))
+    except Exception,e:
+        print e
+        return {'error':False,'msg':u'提交内容错误！'}
+    # 添加issuer信息
+    builder=builder.issuer_name(
+        x509.Name([
+            x509.NameAttribute(NameOID.COMMON_NAME,issuer_com_name),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME,issuer_zuzhi_name),
+            x509.NameAttribute(NameOID.COUNTRY_NAME,issuer_guojia_name),
+        ])
+    )
+    # 其他杂项    
+    ##############
+    try:
+        builder=builder.not_valid_before(datetime.datetime.strptime(before_time,'%Y-%m-%d %H:%M:%S'))
+        builder=builder.not_valid_after(datetime.datetime.strptime(after_time,'%Y-%m-%d %H:%M:%S'))
+    except Exception,e:
+        return {'error':False,'msg':u'过期时间小于颁发时间！'}
+    builder=builder.serial_number(x509.random_serial_number())
+    ##################
+    try:
+        dns_name=[x509.DNSName(i) for i in beiyong_name.split(',')]
+    except Exception,e:
+        print e
+        return {'error':False,'msg':u'备用名请用逗号隔开！'}
+    builder=builder.add_extension(x509.SubjectAlternativeName(dns_name),critical=False)
+
+    builder=builder.add_extension(x509.BasicConstraints(ca=root_flag, path_length=None), critical=True,)
+
+    #########################   
+    
+    #########################
+    if mysf == 'RSA':
+        private_key=rsa.generate_private_key(
+            public_exponent=65537,
+            key_size=int(myqd),
+            backend=default_backend()
+        )
+        builder=builder.public_key(private_key.public_key())
+        if key_pass:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.BestAvailableEncryption(key_pass),
+            )
+        else:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.NoEncryption(),
+            )
+        if qmsf == 'MD5':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.MD5(),backend=default_backend())
+        elif qmsf == 'SHA1':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        elif qmsf == 'SHA224':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA224(),backend=default_backend())
+        elif qmsf == 'SHA256':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA256(),backend=default_backend())
+        elif qmsf == 'SHA384':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA384(),backend=default_backend())
+        elif qmsf == 'SHA512':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA512(),backend=default_backend())
+        else:
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        return {'error':True,'cert':certificate.public_bytes(serialization.Encoding.PEM),'priv_key':key}
+    elif mysf == 'DSA':
+        private_key=dsa.generate_private_key(
+            key_size=int(myqd),
+            backend=default_backend()
+        )
+        builder=builder.public_key(private_key.public_key())
+        if key_pass:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.BestAvailableEncryption(key_pass),
+            )
+        else:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.NoEncryption(),
+            )
+        if qmsf == 'SHA1':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        elif qmsf == 'SHA224':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA224(),backend=default_backend())
+        elif qmsf == 'SHA256':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA256(),backend=default_backend())
+        else:
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        return {'error':True,'cert':certificate.public_bytes(serialization.Encoding.PEM),'priv_key':key}
+    elif mysf =='ECDSA':
+        if myqd == 'P192':
+            private_key=ec.generate_private_key(
+                curve=ec.SECP192R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+        elif myqd == 'P224':
+            private_key=ec.generate_private_key(
+                curve=ec.SECP224R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+        elif myqd == 'P256':
+            private_key=ec.generate_private_key(
+                curve=ec.SECP256R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+        elif myqd == 'P384':
+            private_key=ec.generate_private_key(
+                curve=ec.SECP384R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+        elif myqd == 'P521':
+            private_key=ec.generate_private_key(
+                curve=ec.SECP521R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+        else:
+            private_key=ec.generate_private_key(
+                curve=ec.SECP256R1(),
+                backend=default_backend()
+            )
+            builder=builder.public_key(private_key.public_key())
+
+        if key_pass:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.BestAvailableEncryption(key_pass),
+            )
+        else:
+            key=private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.NoEncryption(),
+            )
+        if qmsf == 'SHA1':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        elif qmsf == 'SHA224':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA224(),backend=default_backend())
+        elif qmsf == 'SHA256':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA256(),backend=default_backend())
+        elif qmsf == 'SHA384':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA384(),backend=default_backend())
+        elif qmsf == 'SHA512':
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA512(),backend=default_backend())
+        else:
+            certificate=builder.sign(private_key=private_key,algorithm=hashes.SHA1(),backend=default_backend())
+        return {'error':True,'cert':certificate.public_bytes(serialization.Encoding.PEM),'priv_key':key}
