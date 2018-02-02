@@ -10,7 +10,7 @@ OpenSSL管理平台为OpenSSL操作提供可视化的界面，方便快捷地完
 ##### 开发环境：
 基于Python2.7，具体依赖库请参考requirements或pip install -r requirements在线安装。
 ##### 托管
-- 官网：http://www.wossl.org:808
+- 官网：http://www.ssleye.com
 - 码云：https://gitee.com/wossl33/wossl
 - Github:https://github.com/wossl33/wossl
 - 交流群：364788699
@@ -82,4 +82,4 @@ def index():
 - 增加ChaCha20和Salsa20对称算法。
 - 增加公私钥之间PKCS1、PKCS8相互转换
 - 增加PEM、PKCS12、JKS证书格式之间相互转换
-- 请前往http://www.wossl.org:808
+- 请前往http://www.ssleye.com
