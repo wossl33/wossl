@@ -80,4 +80,6 @@ def index():
 ###### v1.2.0
 - 增加AES的认证加密算法，支持CCM、EAX、GCM、SIV、OCB等多种加解密模式。
 - 增加ChaCha20和Salsa20对称算法。
+- 增加公私钥之间PKCS1、PKCS8相互转换
+- 增加PEM、PKCS12、JKS证书格式之间相互转换
 - 请前往http://www.wossl.org:808
