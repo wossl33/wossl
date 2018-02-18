@@ -82,4 +82,7 @@ def index():
 - 增加ChaCha20和Salsa20对称算法。
 - 增加公私钥之间PKCS1、PKCS8相互转换
 - 增加PEM、PKCS12、JKS证书格式之间相互转换
+- 增加AES、DES、3DES及AES加密认证算法中5种填充模式ZeroPadding、Pkcs5Padding、Pkcs7Padding、Iso7816Padding、Ansix923Padding。
+###### v2.1.0
+- 增加SSL检测模块中，探测服务端支持的SSL协议及加密套件，并凸显不安全的协议或加密套件。
 - 请前往http://www.ssleye.com
